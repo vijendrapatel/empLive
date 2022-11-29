@@ -33,9 +33,9 @@ const Login = () => {
           autoClose: 5000,
       });
          
-          if (response.data.message === 'success') {
+          if(response.data.message === 'success') {
             console.log("login done")
-            // localStorage.setItem("authenticated",response.data.message);
+            localStorage.setItem("authenticated",response.data.message);
             navigate('/dashboard');
           }
           else {

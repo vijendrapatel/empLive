@@ -25,28 +25,23 @@ import SalaryHistory from "../Salary/Salary_history";
 function Dashboard(props) {
   let navigate = useNavigate();
   let Auth =  localStorage.getItem("authenticated");
-  console.log("local chala -- > "+Auth)
+  console.log("Auth -- > "+  Auth)
   const active = ({isActive}) => {
      return{
-      fontWeight: isActive ? 'bold' : 'normal',
-     }
 
+      fontWeight: isActive ? 'bold' : 'normal',
      
+    }  
   }
   return (
     <div>
       <Routes>
       <Route path="/" element={<Login/>} />
-{/* {Auth != 'success' ? navigate("/") : */}
-
-
-
-<>
-
-
-<Route style={active} path="/dashboard" element={<Dashboardd/>} />
-      <Route style={active} path="/Emplist" element={<Emplist/>} />
       <Route path="/login" element={<Login/>} />
+{Auth != 'success' ? navigate("/") :
+<>
+      <Route style={active} path="/dashboard" element={<Dashboardd/>} />
+      <Route style={active} path="/Emplist" element={<Emplist/>} />
       <Route style={active} path="/AddEmployee" element={<AddEmployee/>} />
       <Route path="/UpdateEmployee" element={<UpdateEmp/>} />
       <Route path="/EmployeeDetail" element={<EmployeeDetail/>} />
@@ -63,11 +58,8 @@ function Dashboard(props) {
 <Route path="/leaves" element={<CurrentLeaves/>} />
 <Route path="/all_leaves" element={<ManageLeaves/>} />
 <Route path="/holiday" element={<Holidays/>} />
-
-
-
 </>
-{/* } */}
+ }
       </Routes>
     </div>
   );

@@ -4,10 +4,10 @@ import '../../styles/Attendance/dashboard.css';
 // import company_logo from "../../../src/img/Pvtltd.png";
 const Header = () => {
   let navigate = useNavigate();
-  const signOut = () =>{
-    localStorage.setItem("authenticated",null);
-    navigate("/EmployeeManagement/");
-  }
+  // const signOut = () =>{
+  //   localStorage.setItem("authenticated",null);
+  //   navigate("/EmployeeManagement/");
+  // }
   return (
     <div>
       {/* <div className="header_box">

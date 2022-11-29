@@ -7,14 +7,14 @@ import '../../styles/Attendance/dashboard.css';
 
 const Sidebar = () => {
   let navigate = useNavigate();
+ 
   const signOut = () =>{
     localStorage.setItem("authenticated",null);
     navigate("/");
   }
+  
     return (
         <>
-
-
              <nav className="col-md-2 d-none d-md-block bg-light sidebar">
 
             {/* <div class="profile-card">
@@ -37,7 +37,6 @@ const Sidebar = () => {
                   <li><FcConferenceCall className='h1'/><div className='m-0'>
                     <Link to="/Emplist" className="nav-link">
                     <span data-feather="shopping-cart"></span>
-                    
                     Employee
                   </Link></div></li>
               <li><FcDepartment className='m-0'/><div className='m-0'>
