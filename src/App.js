@@ -5,15 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from './MyComponent/common/Dashboard';
 
 function App() {
-//   let auth = localStorage.getItem('authenticated')
-//   useEffect(() => {
-//  console.log("authththth------     "+auth);
-//   },[auth])
+   let auth;
+   auth = localStorage.getItem('authenticated')
+   console.log("auth"+auth);
   return (
     <div className="App">
-      {/* {auth == 'success' ? <Login/> :  */}
-      <Dashboard/>
-      {/* } */}
+      { auth == 'success' ? <Dashboard/> : <Login/>} 
     </div>
   );
 }

@@ -1,10 +1,12 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from 'axios';
 import { RingLoader } from  'react-spinners'
 import '../../styles/Login/login.css';
+
+
 
 const Login = () => {
   let navigate = useNavigate();
@@ -15,10 +17,26 @@ const Login = () => {
 
   Axios.defaults.withCredentials = true;
 
+  let auth = localStorage.getItem('authenticated')
+  useEffect(() => {
+  if(auth != 'success'){
+    
+    console.log("helloo")
+    navigate('/');
+  }
+  },[])
+
   const onSubmit = () => {
-  
+
+    if(mail.length === 0){
+      toast("Please Enter Email",{
+        position: "top-center",
+        autoClose: 3000,
+        });
+      return false;
+     }
      if(pass.length === 0){
-      toast("Please Enter the Password",{
+      toast("Please Enter Password",{
         position: "top-center",
         autoClose: 3000,
         });
@@ -32,17 +50,18 @@ const Login = () => {
           position: "top-center",
           autoClose: 5000,
       });
-         
           if(response.data.message === 'success') {
             console.log("login done")
+            console.log("response.data.message=------>  "+response.data.message)
             localStorage.setItem("authenticated",response.data.message);
             navigate('/dashboard');
+            
           }
           else {
           }
       });
   };
-  console.log("authenticated   --- > "+authenticated)
+  
   const emailOnchange=(e)=>{
     setmail(e.target.value)
     }

@@ -41,6 +41,7 @@ const AddEditEmp = (props) => {
   const [status, setstatus] = useState(0);
   const [salary, setsalary] = useState();
   const [stateId, setStateId] = useState("");
+  const [activeTab, setActiveTab] = useState('tab1');
 
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("");
@@ -68,6 +69,13 @@ const AddEditEmp = (props) => {
     }
     if (gender.length === 0) {
       toast("Please Enter the Gender", {
+        position: "top-center",
+        autoClose: 5000,
+      });
+      return false;
+    }
+    if (gender.length === 0) {
+      toast("Please Enter qualification", {
         position: "top-center",
         autoClose: 5000,
       });
@@ -101,14 +109,6 @@ const AddEditEmp = (props) => {
       });
       return false;
     }
-    
-    if (city.length === 0) {
-      toast("Please Enter the city", {
-        position: "top-center",
-        autoClose: 5000,
-      });
-      return false;
-    }
     if (state.length === 0) {
       toast("Please Enter the state", {
         position: "top-center",
@@ -116,8 +116,30 @@ const AddEditEmp = (props) => {
       });
       return false;
     }
+    if (city.length === 0) {
+      toast("Please Enter the city", {
+        position: "top-center",
+        autoClose: 5000,
+      });
+      return false;
+    }
+    
     if (country.length === 0) {
       toast("Please Enter the country", {
+        position: "top-center",
+        autoClose: 5000,
+      });
+      return false;
+    }
+    if (skill.length === 0) {
+      toast("Please Enter Skills", {
+        position: "top-center",
+        autoClose: 5000,
+      });
+      return false;
+    }
+    if (salary.length === 0) {
+      toast("Please Enter salary", {
         position: "top-center",
         autoClose: 5000,
       });
@@ -143,7 +165,6 @@ const AddEditEmp = (props) => {
       skills:skill,
       status:status,
       salary:salary,
-    
       headers: { "Content-Type": "multipart/form-data"}
     })
     
@@ -165,7 +186,9 @@ const AddEditEmp = (props) => {
       }
       // console.log("---------------------------------------"+(`insertId`))
         //  navigate("/Bankdetails");
+        navigate("/Emplist")
     });
+    setActiveTab('tab2')
   alert("Data is saved successfully")
 }
 
@@ -196,7 +219,7 @@ const AddEditEmp = (props) => {
     getCity();
   }, [stateId]);
 
-// console.log("))))______________"+state)
+console.log("activeTab______________"+activeTab)
   const nameOnchange = (e) => {
     setName(e.target.value)
   }
@@ -236,18 +259,20 @@ const AddEditEmp = (props) => {
     getCity();
   }
 
-  const statusOnchange = (e) => {
-    if (e.target.checked) {
+  // const statusOnchange = (e) => {
+  //   if (e.target.checked) {
      
-      setstatus(1)
-    } else {
-      setstatus(0)
+  //     setstatus(1)
+  //   } else {
+  //     setstatus(0)
 
-    }
+  //   }
+  // };
+
+    const statusOnchange = (e) => {
+   setstatus(e.target.value)
   };
-  console.log('checked or not - '+ status);
- 
-
+console.log("statussss------>>  "+status);
   //   setstatus(e.target.value)
   //   console.log(e.target.value)
   // }
@@ -270,6 +295,7 @@ const AddEditEmp = (props) => {
     setsalary(e.target.value)
     console.log("------"+e.target.value)
   }
+
   return (
     <>
     {/* <div className="App">
@@ -296,11 +322,11 @@ const AddEditEmp = (props) => {
 <Tabs>
     <TabList>
       <Tab><h3>Personal Details</h3></Tab>
-      <Tab><h3>Bank Details</h3></Tab>
+      {activeTab == 'tab2' ? 
+      <Tab defaultIndex ><h3>Bank Details</h3></Tab>:
+      <Tab defaultIndex ><h3>Bank Details</h3></Tab>}
       <Tab><h3>Increment Details</h3></Tab>
       <Tab><h3>Document Upload</h3></Tab>
-
-
     </TabList>
 
     <TabPanel >
@@ -515,7 +541,7 @@ const AddEditEmp = (props) => {
       </div>
     </div>
 
-    <div class="col-md-4 mt-3">
+    {/* <div class="col-md-4 mt-3">
       <div class="form-group">
     <label for="form_name" className='label_text'>Status *</label>
 
@@ -525,11 +551,23 @@ const AddEditEmp = (props) => {
           
           <span className='label_text'>Active</span>
 </div>
-
-          
-
-        </div>
+</div>
+      </div> */}
+      <div class="col-md-4">
+      <div class="form-group">
+        <label for="form_lastname" className='label_text'>Status</label>
+        <select onChange={statusOnchange}  className={"dept label_text"}>Select
+                    <option >Select</option>
+                    <option value={'0'} >Old Employee</option>
+                    <option value={'1'} >Current Employee</option>
+                    <option value={'2'} >For Interview</option>
+                    {/* {(state || []).map((statedata) => (
+                      <option value={[statedata.state,statedata.id]}
+                       >{statedata.state}</option>
+                    ))} */}
+                  </select>
       </div>
+    </div>
     </div>
     </div>
   <div class="col-md-3 mt-3">
@@ -541,7 +579,7 @@ const AddEditEmp = (props) => {
 
 </div>
     </TabPanel>
-    <TabPanel >
+    <TabPanel defaultIndex={activeTab == 'tab2' ? 0 : null}  >
       <Bankdetails/>
     </TabPanel>
     <TabPanel>

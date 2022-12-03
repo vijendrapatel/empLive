@@ -15,9 +15,11 @@ const IncrementLog = () => {
   const [appliedon, setappliedon] = useState("");
   const [apicall, setapicall] = useState(false);
 
+if(salary == undefined){
+  salary = ''
 
-  
- 
+}
+console.log("salary--"+salary)
 
   const addincrementDetails = () => {
     // if (!oldsalary) {
@@ -46,7 +48,7 @@ const IncrementLog = () => {
   Axios.post("https://apnaorganicstore.in/empapp/incrementlogcreate", {
       staff_id:idd,
       staff_name: sname,
-      old_salary:salary,
+      old_salary:oldsalary,
       new_salary: newsalary,
       applied_on:appliedon,
        }).then((response) => {
@@ -55,9 +57,14 @@ const IncrementLog = () => {
       id: idd,
       salary:newsalary
     }).then((response) => {
-      console.log("++++++++++--------++++++"+JSON.stringify(response))
+      toast("Added successfull !!! ", {
+        position: "top-center",
+        autoClose: 5000,
+      });
+      
     });
   }
+
   // };
   // useEffect(() => {
   //   getincrement()
@@ -99,7 +106,7 @@ return (
                                 <div class="form-group">
                                   <label for="form_name" className='label_text'>Old Salary*</label>
                                   <input id="form_name" type="text" name="name" class="form-control label_text " placeholder="" required="required" 
-                                  value={salary} onChange={oldonChange} />
+                                  value={oldsalary} onChange={oldonChange} />
 
                                 </div>
                               </div>

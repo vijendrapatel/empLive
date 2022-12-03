@@ -76,7 +76,6 @@ const UpdateEmp = (props) => {
       setlastworkdate(moment(response.data[0].last_working_date).format("YYYY-MM-DD"))
       setsalaryval(response.data[0].salary)
       setoldsalary(response.data[0].salary)
-
       });
         department();
          }
@@ -116,7 +115,6 @@ const onincdetailclick=()=>{
   const getStates = () => {
     Axios.get("https://apnaorganicstore.in/empapp/state").then((response) => {
       setState(response.data);
-
     });
   };
 
@@ -379,7 +377,7 @@ const salaryyOnchange = (e) => {
   const appliedonChange = (e) => {
     setappliedon(e.target.value)
   }
-
+console.log("state  - "+statedata)
   return (
     <>
     
@@ -504,8 +502,8 @@ const salaryyOnchange = (e) => {
                           <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_lastname" className='label_text'>State*</label>
-      
-                     <select onChange={stateOnchange}  className={"dept label_text"} value={statedata.state}>Select
+      {statedata}
+                     <select onChange={stateOnchange}  className={"dept label_text"} value={statedata}>
                     <option>State</option>
                     {(state || []).map((statedata) => (
                       <option value={[statedata.state,statedata.id]}
@@ -517,7 +515,7 @@ const salaryyOnchange = (e) => {
                           <div class="col-md-4">
                             <div class="form-group">
                               <label for="form_name" className='label_text'>City*</label>
-                              <select onChange={cityOnchange} className={"dept label_text"} value={citydata.city}>Select
+                              <select onChange={cityOnchange} className={"dept label_text"} value={citydata}>Select
                                 <option>City</option>
                                 {(city || []).map((citydata) => (
 

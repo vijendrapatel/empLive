@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BsFillCaretLeftFill } from "react-icons/bs";
+import { BsFillCaretLeftFill, BsQuestionDiamond } from "react-icons/bs";
 import { BsFillCaretRightFill } from "react-icons/bs";
 import moment from "moment";
 import Header from "../common/Header";
@@ -59,9 +59,17 @@ function DailyAttendance(props) {
     let changeformat = moment(datmon, "D-MM-YYYY").format(`YYYY-MM-DD`);
     mdays.push(changeformat);
   }
+  let result
   const getEmployees = () => {
     Axios.get(`https://apnaorganicstore.in/empapp/employees`).then((response) => {
       setEmployeedata(response.data);
+      // let v = response.data
+      //  result = v.filter((index,self) =>
+      //   index === self.findIndex((t) => (
+      //     t.status == '1' 
+      //   )));
+        // setEmployeedata(result);
+        console.log("____++___++__++___"+JSON.stringify(result));
     });
     Axios.get(`https://apnaorganicstore.in/empapp/getholiday/${firstdate}/${lastdate}`).then((response) => {
       setholiday(response.data);
@@ -70,8 +78,9 @@ function DailyAttendance(props) {
   useEffect(() => {
     getEmployees();
   }, [attendmonth]);
-
+console.log("11111111--------> "+JSON.stringify(result))
   // search function
+
   let filteredItems = employeedata.filter(
     (item) =>
       JSON.stringify(item).toLowerCase().indexOf(filterText.toLowerCase()) !==
@@ -110,7 +119,7 @@ function DailyAttendance(props) {
                 <div className="btn-group mr-2 px-5">
                   <Link to="/AttendanceHistory" className="nav-link">
                     <button className="btn att_btn text-white text-center px-0 py-3">
-                     <h3>Attendance History</h3> 
+                     <h3>Attendance History</h3>
                     </button>
                   </Link>
                 </div>
@@ -199,6 +208,7 @@ function DailyAttendance(props) {
                       <tbody className="dailyattendace_tbody">
                         {(filteredItems || []).map((dataa, i) => {
                           return (
+                            dataa.status == '1' ? 
                             <tr key={i}>
                               <td scope="row">{dataa.id}</td>
                               <td
@@ -227,7 +237,8 @@ function DailyAttendance(props) {
                                 />
                               }
                             </tr>
-                          );
+                         : null 
+                        ) 
                         })}
                       </tbody>
                     </table>

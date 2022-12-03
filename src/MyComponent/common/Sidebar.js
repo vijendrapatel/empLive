@@ -9,15 +9,14 @@ const Sidebar = () => {
   let navigate = useNavigate();
  
   const signOut = () =>{
-    localStorage.setItem("authenticated",null);
+    console.log("clear()------------")
     navigate("/");
+    localStorage.clear();
   }
-  
     return (
         <>
              <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-
-            {/* <div class="profile-card">
+           {/* <div class="profile-card">
                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="user" class="profile-photo"/>
             	<h5><a href="#" class="text-white">Sarah Cruiz</a></h5>
             	<a href="#" class="text-white"><i class="fa fa-user"></i> 1,299 followers</a>

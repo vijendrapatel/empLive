@@ -168,8 +168,8 @@ const Emplist = () => {
                 
                
 
-    <DataTable
-    className='emp_data'
+            <DataTable
+            className='emp_data'
             pagination
             highlightOnHover
 		        pointerOnHover
